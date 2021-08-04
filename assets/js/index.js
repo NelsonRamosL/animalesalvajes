@@ -29,16 +29,13 @@ const getPhoto = async () => {
 
 const llenarFotografia = (buscar) => {
 
-
     getPhoto().then(resp => {
         const resultado = resp.animales.find((Animales) => Animales.name === buscar);
         console.log(resultado);
-        preview.innerHTML = `<img src="/assets/imgs/${resultado.imagen}" width="100">`;
+        preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="100" datasound="${resultado.sonido}" >`;
     });
 
 
-
-    console.log("llenarFotografia");
 }
 
 
@@ -52,15 +49,50 @@ const btnRegistrar = document.getElementById("btnRegistrar");
 const preview = document.getElementById("preview");
 const comentarios = document.getElementById("comentarios");
 const Tabla = document.getElementById("Tabla");
-const animalesSalvajes =[];
+const animalesSalvajes = [];
 
 edad.addEventListener("change", () => {
     console.log("en edad");
     const llenarFoto = llenarFotografia(animal.value);
+    console.log("en edad recuperar varReturn", llenarFoto);
 })
 
 btnRegistrar.addEventListener("click", () => {
-    console.log("boton");
 
+    if (animal.value && edad.value && comentarios) {
+
+        let img = document.getElementById("imagen").getAttribute("src");
+        let sonido = document.getElementById("imagen").getAttribute("datasound");
+        console.log("Nombre : ", animal.value, "edad : ", edad.value, "imagen : ", img, "comentario :", comentarios.value, "sonido :", sonido);
+
+// 2. Crear las instancias de las clases utilizando los datos del formulario.
+        switch (animal.value) {
+            case 'Leon':
+                animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
+                break;
+            case 'Lobo':
+                animalesSalvajes.push(new Lobo(animal.value, edad.value, img, comentarios.value, sonido));
+                break;
+            case 'Oso':
+                animalesSalvajes.push(new Oso(animal.value, edad.value, img, comentarios.value, sonido));
+                break;
+            case 'Serpiente':
+                animalesSalvajes.push(new Serpiente(animal.value, edad.value, img, comentarios.value, sonido));
+                break;
+            case 'Aguila':
+                animalesSalvajes.push(new Aguila(animal.value, edad.value, img, comentarios.value, sonido));
+                break;
+            default:
+            // code block
+        }
+
+
+     //   animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
+
+
+        console.log(animalesSalvajes)
+    } else {
+        alert("Seleccione Animal y Edad tambien complete el Comentario");
+    }
 
 })
