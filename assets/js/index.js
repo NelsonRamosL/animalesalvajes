@@ -32,7 +32,7 @@ const llenarFotografia = (buscar) => {
     getPhoto().then(resp => {
         const resultado = resp.animales.find((Animales) => Animales.name === buscar);
         console.log(resultado);
-        preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="100" datasound="${resultado.sonido}" >`;
+        preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="150" datasound="${resultado.sonido}" >`;
     });
 
 
@@ -49,6 +49,7 @@ const btnRegistrar = document.getElementById("btnRegistrar");
 const preview = document.getElementById("preview");
 const comentarios = document.getElementById("comentarios");
 const Tabla = document.getElementById("Tabla");
+let animales = document.getElementById("Animales");
 const animalesSalvajes = [];
 
 edad.addEventListener("change", () => {
@@ -90,9 +91,30 @@ btnRegistrar.addEventListener("click", () => {
      //   animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
 
 
-        console.log(animalesSalvajes)
+        console.log(animalesSalvajes);
+        tarjetas();
     } else {
         alert("Seleccione Animal y Edad tambien complete el Comentario");
     }
 
 })
+
+
+const tarjetas = () => {
+    console.log("dentro de targetas");
+animales.innerHTML ='';
+animalesSalvajes.forEach((p,i) => {
+    animales.innerHTML += `
+    <div class="card col-4" style="width: 5rem;">
+          <img src="${p.img}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">${p.nombre}</h5>
+            <a href="#" class="btn btn-primary">audio</a>
+          </div>
+    `;
+});
+
+
+
+
+}
