@@ -109,7 +109,7 @@ animalesSalvajes.forEach((p,i) => {
           <img src="${p.img}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">${p.nombre}</h5>
-            <a href="#" class="btn btn-primary">audio</a>
+            <audio id="mireproductor" src="/assets/sounds/${p.sonido}" style=" width:150px;" controls >sonido</audio>
           </div>
     `;
 });
