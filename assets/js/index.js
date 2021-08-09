@@ -1,42 +1,32 @@
-/** 
- * 5. Dividir el código en módulos 
- */
-import { Animales, Leon, Lobo, Oso, Serpiente, Aguila } from "./clases.js";
+import { Animales, Leon, Lobo, Oso, Serpiente, Aguila } from "./clases.js"; // Dividir el código en módulos 
 
 // funciones
-
-/** 
- * Realizar por lo menos una función autoejecutable IIFE.
- */
-(function () { })();
-
-const url = 'http://localhost:5500/animales.json';
-const getPhoto = async () => {
-    /**
-        Realizar una consulta asíncrona utilizando una función async/await para obtener las
-    imágenes correspondientes a los animales.
-     */
-    try {
-        const response = await fetch(url); // Luego mediante el bloque de try/catch conectarse a la URL indicada anteriormente con el método fetch
-        const photo = await response.json(); // utilizando a la vez await
-        // console.log(photo);
-        return photo;  // para que retorne directamente el valor de la promesa 
+const getPhoto = (() => {  //Realizar por lo menos una función autoejecutable IIFE.
+    const url = 'http://localhost:5500/animales.json';
+    try {  // Luego mediante el bloque de try/catch 
+        const photo = async () => {  //función async/await para obtener las imágenes correspondientes a los animales.
+            const response = await fetch(url);   // conectarse a la URL indicada anteriormente con el método fetch
+            const data = await response.json(); // utilizando a la vez await
+            return data;  // para que retorne directamente el valor de la promesa 
+        }
+        console.log(photo());
+        return photo;
     } catch (err) {
         console.log(err);
     }
-}
+})();
 
 
-const llenarFotografia = (buscar) => {
+const llenarFotografia = async (buscar) => {
+    const fotos  = await getPhoto();
+    console.log(fotos.animales);
+    const resultado = fotos.animales.find((a) => a.name === buscar)
+    console.log(resultado);
+    preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="150" datasound="${resultado.sonido}" >`;
+};
 
-    getPhoto().then(resp => {
-        const resultado = resp.animales.find((Animales) => Animales.name === buscar);
-        console.log(resultado);
-        preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="150" datasound="${resultado.sonido}" >`;
-    });
 
 
-}
 
 
 
@@ -66,7 +56,7 @@ btnRegistrar.addEventListener("click", () => {
         let sonido = document.getElementById("imagen").getAttribute("datasound");
         console.log("Nombre : ", animal.value, "edad : ", edad.value, "imagen : ", img, "comentario :", comentarios.value, "sonido :", sonido);
 
-// 2. Crear las instancias de las clases utilizando los datos del formulario.
+        // 2. Crear las instancias de las clases utilizando los datos del formulario.
         switch (animal.value) {
             case 'Leon':
                 animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
@@ -88,7 +78,7 @@ btnRegistrar.addEventListener("click", () => {
         }
 
 
-     //   animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
+        //   animalesSalvajes.push(new Leon(animal.value, edad.value, img, comentarios.value, sonido));
 
 
         console.log(animalesSalvajes);
@@ -102,19 +92,41 @@ btnRegistrar.addEventListener("click", () => {
 
 const tarjetas = () => {
     console.log("dentro de targetas");
-animales.innerHTML ='';
-animalesSalvajes.forEach((p,i) => {
-    animales.innerHTML += `
+    animales.innerHTML = '';
+    animalesSalvajes.forEach((p, i) => {
+        animales.innerHTML += `
     <div class="card col-4" style="width: 5rem;">
-          <img src="${p.img}" class="card-img-top" alt="...">
+          <img src="${p.img}" class="card-img-top" alt="..." >
           <div class="card-body">
             <h5 class="card-title">${p.nombre}</h5>
             <audio id="mireproductor" src="/assets/sounds/${p.sonido}" style=" width:150px;" controls >sonido</audio>
           </div>
     `;
-});
 
 
+    });
+
+    document.querySelectorAll(".card").forEach((i) => {
+        console.log("creando selector");
+        i.addEventListener("click", (e) => {
+            console.log("dentro del click");
+            let modal = document.getElementById("exampleModal");
+
+            $("#exampleModal").modal("toggle");
+            modal.innerHTML = `
+<div class="modal-dialog modal-dialog-centered w-25" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-body">contenido</div>
+      </div>
+    </div>`;
+
+
+        })
+
+    })
 
 
 }
+
+
+
