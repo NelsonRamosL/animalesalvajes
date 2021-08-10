@@ -22,7 +22,7 @@ const llenarFotografia = async (buscar) => {
     console.log(fotos.animales);
     const resultado = fotos.animales.find((a) => a.name === buscar)
     console.log(resultado);
-    preview.innerHTML = `<img id="imagen" src="/assets/imgs/${resultado.imagen}" width="150" datasound="${resultado.sonido}" >`;
+    preview.innerHTML = `<img id="imagen" src="./assets/imgs/${resultado.imagen}" width="150" datasound="${resultado.sonido}" >`;
 };
 
 
