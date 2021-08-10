@@ -108,8 +108,8 @@ const tarjetas = () => {
 
     document.querySelectorAll(".modalTargetas").forEach((i,p) => {
 
-        console.log("creando selector",p);
-        console.log("creando selector",i);
+        console.log("creando selector puntero ",p);
+        console.log("creando selector ",i);
         i.addEventListener("click", (e) => {
             console.log("dentro del click");
             let modal = document.getElementById("exampleModal");
