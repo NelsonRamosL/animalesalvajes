@@ -99,7 +99,7 @@ const tarjetas = () => {
           <img src="${p.img}" class="modalTargetas card-img-top" alt="..." >
           <div class="card-body">
             <h5 class="card-title">${p.nombre}</h5>
-            <audio id="mireproductor" src="/assets/sounds/${p.sonido}" style=" width:150px;" controls >sonido</audio>
+            <audio id="mireproductor" src="./assets/sounds/${p.sonido}" style=" width:150px;" controls >sonido</audio>
           </div>
     `;
 
