@@ -95,8 +95,8 @@ const tarjetas = () => {
     animales.innerHTML = '';
     animalesSalvajes.forEach((p, i) => {
         animales.innerHTML += `
-    <div class="card col-4" style="width: 5rem;">
-          <img src="${p.img}" class="card-img-top" alt="..." >
+    <div class=" card col-4" style="width: 5rem;">
+          <img src="${p.img}" class="modalTargetas card-img-top" alt="..." >
           <div class="card-body">
             <h5 class="card-title">${p.nombre}</h5>
             <audio id="mireproductor" src="/assets/sounds/${p.sonido}" style=" width:150px;" controls >sonido</audio>
@@ -106,23 +106,36 @@ const tarjetas = () => {
 
     });
 
-    document.querySelectorAll(".card").forEach((i) => {
-        console.log("creando selector");
+    document.querySelectorAll(".modalTargetas").forEach((i,p) => {
+
+        console.log("creando selector",p);
+        console.log("creando selector",i);
         i.addEventListener("click", (e) => {
             console.log("dentro del click");
             let modal = document.getElementById("exampleModal");
+    
 
-            $("#exampleModal").modal("toggle");
+
+
+
+
+console.log(animalesSalvajes[p]);
+
+            
             modal.innerHTML = `
-<div class="modal-dialog modal-dialog-centered w-25" role="document">
+    <div class="modal-dialog modal-dialog-centered w-25" role="document">
+    <img src="${animalesSalvajes[p].img}" class="modalTargetas card-img-top" alt="..." >
       <div class="modal-content bg-dark">
-        <div class="modal-body">contenido</div>
+        <div class="modal-body text-white">${animalesSalvajes[p].edad}</div>
+        <div class="modal-body text-white">Comentarios</div>
+        <div class="modal-body text-white">${animalesSalvajes[p].comentarios}</div>
+        
       </div>
     </div>`;
-
-
+    
+    $("#exampleModal").modal("toggle");
         })
-
+    
     })
 
 

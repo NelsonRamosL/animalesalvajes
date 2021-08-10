@@ -11,6 +11,7 @@ class Animales {
         this.getEdad = () => _edad;
         this.getImg = () => _img;
         this.getSonido = () => _sonido;
+        this.getComentarios = () => _comentarios;
 
         this.setComentarios = (nuevoComentario) => { _comentarios = nuevoComentario; }
     }
@@ -19,6 +20,7 @@ class Animales {
     get edad() { return this.getEdad(); }
     get img() { return this.getImg(); }
     get sonido() { return this.getSonido(); }
+    get comentarios() { return this.getComentarios(); }
 
     set comentarios(nuevoComentario) { this.setComentarios(nuevoComentario); }
 }
@@ -71,4 +73,4 @@ class Aguila extends Animales {
 }
 
 
-export {Animales,Leon,Lobo,Oso,Serpiente,Aguila};
+export { Animales, Leon, Lobo, Oso, Serpiente, Aguila };
